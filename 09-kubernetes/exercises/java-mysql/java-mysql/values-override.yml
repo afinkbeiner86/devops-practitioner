@@ -1,0 +1,27 @@
+appName: java-app
+appReplicas: 3
+imageName: jimsemara/java-mysql
+imageTag: 1.0
+containerPort: 8080
+
+servicePort: 8080
+
+configName: db-config
+configData:
+  DB_SERVER: mysql-primary.default.svc.cluster.local
+
+secretName: db-secret
+secretType: Opaque
+secretData: 
+  DB_USER: my-user
+  DB_PWD: my-pass
+  DB_NAME: my-app-db
+  MYSQL_ROOT_PASSWORD: secret-root-pass
+
+regularData: {}
+ # MY_ENV: my-value
+
+ingress:
+  hostName: #lke node balancer
+  pathType: Exact
+  path: /

@@ -1,0 +1,21 @@
+appName: my-app
+appReplicas: 1
+imageName: myimage
+imageTag: versiontag
+containerPort: 80
+
+servicePort: 80
+
+configName: my-config
+configData: {}
+
+secretName: my-secret
+secretType: Opaque
+secretData: {}
+  
+regularData: {}
+
+ingress:
+  hostName: myapp.com
+  pathType: Exact
+  path: /

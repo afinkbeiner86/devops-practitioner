@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - name: phpmyadmin
+        image: phpmyadmin:5.2.0-apache
+        ports: 
+        - containerPort: 80
+        env:
+          - name: PMA_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: mysql-configmap
+                key: db_server
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom: 
+              secretKeyRef:
+                name: mysql-secret
+                key: db_root_pwd
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin-service
+spec:
+  selector:
+    app: phpmyadmin-service
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 80

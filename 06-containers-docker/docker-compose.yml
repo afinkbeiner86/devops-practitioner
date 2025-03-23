@@ -1,0 +1,30 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  db:
+    image: "mysql:${MYSQLTAG}"
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    volumes:
+      - mydb-volume:/var/lib/mysql
+    env_file:
+      - .env
+  phpadmin:
+    image: "phpmyadmin:${PMATAG}"
+    ports:
+      - "7070:80"
+    env_file:
+      - .env
+    depends_on:
+      - db
+  web:
+    image: "myjavaapp:${JAVATAG}"
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - phpadmin
+volumes:
+  mydb-volume:

@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: java-mysql
+spec:
+  rules:
+    - host: #linode-load-balancer
+      http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+               name: java-mysql-service
+               port:
+                number: 8080

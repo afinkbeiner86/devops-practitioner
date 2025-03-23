@@ -1,0 +1,15 @@
+releases:
+  - name: emailservice
+    chart: charts/microservice
+    values:
+      - values/emailservice-values.yml
+
+  - name: productcatalogservice
+    chart: charts/microservice
+    values:
+      - values/productcatalogservice-values.yml
+
+  - name: recommendationservice
+    chart: charts/microservice
+    values:
+      - values/recommendationservice-values.yml

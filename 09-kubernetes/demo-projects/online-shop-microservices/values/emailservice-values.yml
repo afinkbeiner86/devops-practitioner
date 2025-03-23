@@ -1,0 +1,12 @@
+serviceName: emailservice
+imageURL: gcr.io/google-samples/microservices-demo/emailservice
+imageTag: v0.5.2
+replicaCount: 2
+containerPort: 8080
+containerEnvVars:
+- name: PORT
+  value: "8080"
+- name: DISABLE_PROFILER
+  value: "1"
+
+servicePort: 5000

@@ -1,0 +1,7 @@
+version: 1.0.0 
+location: /Users/devops/demo-projects/nodejs-app 
+linux_name: devops
+user_home_dir: /home/{{linux_name}}
+
+docker_username: {SET_USERNAME}
+docker_password: {SET_PASSWORD}

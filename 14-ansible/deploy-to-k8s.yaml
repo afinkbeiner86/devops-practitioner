@@ -1,0 +1,19 @@
+---
+# You need a valid kubeconfig file to authenticate with the kubernetes cluster before
+# running this play.
+# You can get said file using 'aws eks update-kubeconfig --name <cluster_name>' and
+# then run 'export K8S_AUTH_KUBECONFIG={FILE_PATH}' to setup the environment.
+- name: Deploy app in new namespace
+  hosts: localhost
+  tasks:
+    - name: Create a k8s namespace
+      community.kubernetes.k8s:
+        name: my-app
+        api_version: v1
+        kind: Namespace
+        state: present
+    - name: Deploy nginx app 
+      community.kubernetes.k8s:
+        src: ./nginx-config.yaml
+        state: present
+        namespace: my-app
